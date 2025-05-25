@@ -1,0 +1,449 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 120 100% 50%;
+
+    --card: 0 0% 3%;
+    --card-foreground: 120 100% 50%;
+
+    --popover: 0 0% 3%;
+    --popover-foreground: 120 100% 50%;
+
+    --primary: 120 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 120 70% 20%;
+    --secondary-foreground: 120 100% 50%;
+
+    --muted: 120 30% 10%;
+    --muted-foreground: 120 70% 40%;
+
+    --accent: 120 70% 20%;
+    --accent-foreground: 120 100% 50%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 0%;
+
+    --border: 120 70% 20%;
+    --input: 120 70% 20%;
+    --ring: 120 100% 50%;
+
+    --radius: 0.5rem;
+  }
+}
+
+/* Custom scrollbar styling */
+.terminal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 0, 0.7) rgba(0, 20, 0, 0.3);
+}
+
+.terminal-scrollbar::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 20, 0, 0.3);
+  border-radius: 4px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 0, 0.7);
+  border-radius: 4px;
+  border: 1px solid rgba(0, 100, 0, 0.3);
+  min-height: 40px;
+}
+
+.terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 0, 0.9);
+}
+
+/* For Firefox */
+.terminal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 0, 0.5) rgba(0, 20, 0, 0.2);
+}
+
+@layer utilities {
+  .animate-progress {
+    animation: progress 2s linear infinite;
+  }
+
+  .animate-glitch {
+    animation: glitch 0.5s linear;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s infinite;
+  }
+
+  .animate-pulse-fast {
+    animation: pulse 1s infinite;
+  }
+
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+  }
+
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 #00ff00;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+  }
+
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: -1px 0 #00ff00;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim2 5s infinite linear alternate-reverse;
+  }
+
+  /* CRT Effects */
+  .scanlines {
+    background: linear-gradient(to bottom, rgba(0, 255, 0, 0.03) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+
+  .crt-flicker {
+    animation: flicker 0.15s infinite;
+  }
+
+  /* Energy core effects */
+  @keyframes pulse {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(5px, 5px);
+    }
+    50% {
+      transform: translate(0, 10px);
+    }
+    75% {
+      transform: translate(-5px, 5px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes heartbeat {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.3;
+    }
+    20% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    40% {
+      transform: scale(0.9);
+      opacity: 0.4;
+    }
+    60% {
+      transform: scale(1.1);
+      opacity: 0.6;
+    }
+    80% {
+      transform: scale(0.9);
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0.3;
+    }
+  }
+
+  .animate-disappear {
+    animation: core-disappear 1.5s forwards;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .animate-fadeOut {
+    animation: fadeOut 0.3s ease-out forwards;
+  }
+
+  .section-transition {
+    animation: sectionFade 0.3s ease-out forwards;
+  }
+
+  .animate-sectionSlideIn {
+    animation: sectionSlideIn 0.3s ease-out forwards;
+  }
+
+  .animate-sectionSlideOut {
+    animation: sectionSlideOut 0.2s ease-in forwards;
+  }
+
+  .animate-phaseTransition {
+    animation: phaseTransition 0.8s ease-in-out forwards;
+  }
+}
+
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-1px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(31px, 9999px, 94px, 0);
+  }
+  10% {
+    clip: rect(112px, 9999px, 76px, 0);
+  }
+  20% {
+    clip: rect(85px, 9999px, 77px, 0);
+  }
+  30% {
+    clip: rect(27px, 9999px, 97px, 0);
+  }
+  40% {
+    clip: rect(64px, 9999px, 98px, 0);
+  }
+  50% {
+    clip: rect(61px, 9999px, 85px, 0);
+  }
+  60% {
+    clip: rect(99px, 9999px, 114px, 0);
+  }
+  70% {
+    clip: rect(34px, 9999px, 115px, 0);
+  }
+  80% {
+    clip: rect(98px, 9999px, 129px, 0);
+  }
+  90% {
+    clip: rect(43px, 9999px, 96px, 0);
+  }
+  100% {
+    clip: rect(82px, 9999px, 64px, 0);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(125px, 9999px, 162px, 0);
+  }
+  10% {
+    clip: rect(120px, 9999px, 147px, 0);
+  }
+  20% {
+    clip: rect(113px, 9999px, 147px, 0);
+  }
+  30% {
+    clip: rect(142px, 9999px, 130px, 0);
+  }
+  40% {
+    clip: rect(106px, 9999px, 98px, 0);
+  }
+  50% {
+    clip: rect(131px, 9999px, 142px, 0);
+  }
+  60% {
+    clip: rect(144px, 9999px, 104px, 0);
+  }
+  70% {
+    clip: rect(121px, 9999px, 115px, 0);
+  }
+  80% {
+    clip: rect(126px, 9999px, 86px, 0);
+  }
+  90% {
+    clip: rect(133px, 9999px, 146px, 0);
+  }
+  100% {
+    clip: rect(147px, 9999px, 124px, 0);
+  }
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.97;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.98;
+  }
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: #00ff00;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.typewriter {
+  display: inline-block;
+}
+
+.enable-scroll {
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+@keyframes core-disappear {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes sectionFade {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sectionSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes phaseTransition {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
